@@ -1,11 +1,13 @@
-import { useEffect,useState } from "react"
+import { useEffect } from "react"
 
 //components
 import WorkoutDetails from '../components/WorkoutDetails'
 import WorkoutForm from "../components/WorkoutForm.js"
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext.js"
 
 const Home=()=>{
-    const [workouts,setWorkouts] = useState(null)
+    // const [workouts,setWorkouts] = useState(null)
+    const {workouts,dispatch}=useWorkoutsContext()
 
     //useEffect fires a function when the component is rendered
     useEffect(()=>{
@@ -14,11 +16,13 @@ const Home=()=>{
             const json = await response.json()
 
             if(response.ok){
-                setWorkouts(json)
+                // setWorkouts(json)
+                dispatch({type:'SET_WORKOUTS',payload:json})
             }
         }
         fetchWorkouts()
-    },[]) //By giving [], it means this funtion will only fire once
+    },[]) 
+    //By giving [], it means this funtion will only fire once
 
     return (
         <div className="home">
