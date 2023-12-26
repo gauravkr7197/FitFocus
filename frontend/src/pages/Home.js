@@ -21,7 +21,7 @@ const Home=()=>{
             }
         }
         fetchWorkouts()
-    },[]) 
+    },[dispatch]) 
     //By giving [], it means this funtion will only fire once
 
     return (

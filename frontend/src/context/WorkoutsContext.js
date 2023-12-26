@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-export const WorkoutContext = createContext()
+export const WorkoutsContext = createContext()
 export const workoutsReducer=(state,action)=>{ //state: reliable previous state value
     switch(action.type){
         case 'SET_WORKOUTS':
@@ -11,6 +11,10 @@ export const workoutsReducer=(state,action)=>{ //state: reliable previous state 
             return {
                 workouts:[action.payload,...state.workouts]
             }  
+        case 'DELETE_WORKOUT':
+            return{
+                workouts: state.workouts.filter((w) => w._id !== action.payload._id)
+            }
         default:
             return state      
     }
@@ -22,13 +26,13 @@ export const WorkoutsContextProvider = ({children}) =>{  //Children property rep
     })
     // workoutsReducer is reducer funtion name and initial value is workouts:null
 
-    dispatch({type:'SET_WORKOUTS',payload:[{},{}]})
+    // dispatch({type:'SET_WORKOUTS',payload:[{},{}]})
+
+    // {/* outputting the root app component */}
 
     return (
-        <WorkoutContext.Provider value={{...state,dispatch}}>
+        <WorkoutsContext.Provider value={{...state,dispatch}}>
             {children} 
-            {/*outputting the root app component */}
-        </WorkoutContext.Provider>
-        // Now all components will have access to our workout context because out app is wrapped inside WorkoutsContextProvider
+        </WorkoutsContext.Provider>
     )
 }
