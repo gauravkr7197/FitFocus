@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const fitRoutes = require("./routes/index");
+const userRoutes = require('./routes/user')
 
 // Intialize express app
 const app = express();
@@ -15,6 +16,7 @@ app.use((req, res, next) => {
 
 //routes
 app.use("/api/fitFocus", fitRoutes);
+app.use("/api/user",userRoutes)
 // app.get('/',(req,res)=>{
 //     res.json({msg:'Welcome to the app'})
 // })
